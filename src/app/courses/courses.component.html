@@ -8,9 +8,7 @@
             </mat-card-header>
             <mat-card-content>
                 <mat-list>
-                    <mat-list-item 
-                    *ngFor="let course of courses"
-                    (click)="selectCourse(course)">
+                    <mat-list-item *ngFor="let course of courses" (click)="selectCourse(course)">
                         {{course.title | titlecase}}
                     </mat-list-item>
                 </mat-list>
@@ -23,17 +21,45 @@
             <mat-card-header>
                 <mat-card-title>
                     <span *ngIf="selectedCourse?.id; else elseBlock">
-                    {{selectedCourse.title | titlecase}}
+                        {{selectedCourse.title | titlecase}}
                     </span>
                     <ng-template #elseBlock>Select A Course</ng-template>
                 </mat-card-title>
             </mat-card-header>
-            <mat-card-content>
-                <pre>{{selectedCourse | json}}</pre>
-            </mat-card-content>
-            <mat-card-actions>
-                <button type ="button" mat-button (click)="selectCourse(null)">Clear</button>
-            </mat-card-actions>
+            <form #form="ngForm">
+                <mat-card-content>
+                        <mat-form-field class="full-width" appearance="fill">
+                            <mat-label>Enter Course Title</mat-label>
+                            <input 
+                            name="title"
+                            matInput 
+                            required
+                            type="text"
+                            placeholder="title"
+                            [(ngModel)]="selectedCourse.title">
+                            <mat-hint>*type the name of the course you want to find or add</mat-hint>
+                        </mat-form-field>
+                        <mat-form-field class="full-width" appearance="fill">
+                            <mat-label>Enter Course description</mat-label>
+                            <input 
+                            name="description"
+                            matInput 
+                            type="text"
+                            placeholder="description"
+                            [(ngModel)]="selectedCourse.description">
+                            <mat-hint>*type the description of your course</mat-hint>
+                        </mat-form-field>
+                        <hr>
+                        {{form.value | json}}
+                        {{form.valid | json}}
+
+                </mat-card-content>
+                <mat-card-actions>
+                    <button type="button" mat-button (click)="clear()">Clear</button>
+                </mat-card-actions>
+
+            </form>
+
         </mat-card>
     </div>
 </div>

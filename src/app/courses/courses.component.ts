@@ -1,4 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { Course } from '../common/models/course';
+
+
+const emptyCourse: Course = {
+  id: null,
+  title: '',
+  description: '',
+  percentComplete: 0,
+  favorite: false,
+}
 
 @Component({
   selector: 'app-courses',
@@ -6,6 +16,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./courses.component.scss']
 })
 export class CoursesComponent implements OnInit {
+
   courses = [
     {
       id: 1,
@@ -24,7 +35,7 @@ export class CoursesComponent implements OnInit {
   ];
 
 
-  selectedCourse = null;
+  selectedCourse = emptyCourse;
 
   constructor() { }
 
@@ -32,8 +43,11 @@ export class CoursesComponent implements OnInit {
   }
 
 
-
   selectCourse(course) {
     this.selectedCourse = course;
+  }
+
+  clear() {
+    this.selectCourse({...emptyCourse})
   }
 }
