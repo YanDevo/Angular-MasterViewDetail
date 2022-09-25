@@ -21,41 +21,51 @@
             <mat-card-header>
                 <mat-card-title>
                     <span *ngIf="selectedCourse?.id; else elseBlock">
-                        {{selectedCourse.title | titlecase}}
+                        {{originalTitle | titlecase}}
                     </span>
                     <ng-template #elseBlock>Select A Course</ng-template>
                 </mat-card-title>
             </mat-card-header>
-            <form #form="ngForm">
+            <form #form="ngForm" (submit)="saveCourse(selectedCourse)">
                 <mat-card-content>
-                        <mat-form-field class="full-width" appearance="fill">
-                            <mat-label>Enter Course Title</mat-label>
-                            <input 
-                            name="title"
-                            matInput 
-                            required
-                            type="text"
-                            placeholder="title"
+                    <mat-form-field class="full-width" appearance="fill">
+                        <mat-label>Enter Course Title</mat-label>
+                        <input name="title" matInput required type="text" placeholder="title"
                             [(ngModel)]="selectedCourse.title">
-                            <mat-hint>*type the name of the course you want to find or add</mat-hint>
-                        </mat-form-field>
-                        <mat-form-field class="full-width" appearance="fill">
-                            <mat-label>Enter Course description</mat-label>
-                            <input 
-                            name="description"
-                            matInput 
-                            type="text"
-                            placeholder="description"
+                        <mat-hint>*type the name of the course you want to find or add</mat-hint>
+                    </mat-form-field>
+                    <mat-form-field class="full-width" appearance="fill">
+                        <mat-label>Enter Course description</mat-label>
+                        <textarea name="description" matInput type="text" placeholder="description"
                             [(ngModel)]="selectedCourse.description">
-                            <mat-hint>*type the description of your course</mat-hint>
-                        </mat-form-field>
-                        <hr>
-                        {{form.value | json}}
-                        {{form.valid | json}}
+                        </textarea>
+                        <mat-hint>*type the description of your course</mat-hint>
+                    </mat-form-field>
+                    <section class="full-width">
+                        <mat-slider
+                        [(ngModel)]="selectedCourse.percentComplete"
+                        class="full-width" 
+                        thumbLabel 
+                        step="1" 
+                        min="0" max="100" 
+                        name="percent-complete"
+                        aria-label="units">
+                        </mat-slider>
+                    </section>
+                    <section>
+                        <mat-checkbox 
+                        [(ngModel)]="selectedCourse.favorite"
+                        name="favorite">Favorite</mat-checkbox>
+                    </section>
 
+
+                    <hr>
+                    <pre>{{form.value | json}}</pre>
+                    <pre> {{form.valid | json}}</pre>
                 </mat-card-content>
                 <mat-card-actions>
-                    <button type="button" mat-button (click)="clear()">Clear</button>
+                    <button type="submit" [disabled]="form.invalid" mat-raised-button color="primary">Submit</button>
+                    <button type="button" mat-raised-button color="secondary" (click)="clear()">Clear</button>
                 </mat-card-actions>
 
             </form>

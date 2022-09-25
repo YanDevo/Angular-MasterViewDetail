@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Course } from '../common/models/course';
+import { CoursesService } from '../common/services/courses.service';
 
 
 const emptyCourse: Course = {
@@ -17,36 +18,42 @@ const emptyCourse: Course = {
 })
 export class CoursesComponent implements OnInit {
 
-  courses = [
-    {
-      id: 1,
-      title: 'Angular 13 Fundamentals',
-      description: 'Learn the fundamentals of Angular 13',
-      percentComplete: 26,
-      favorite: true
-    },
-    {
-      id: 2,
-      title: 'Web Dev Essentials',
-      description: 'Learn the fundamentals of Web Development Now!',
-      percentComplete: 26,
-      favorite: true
-    }
-  ];
-
-
+  courses = [];
   selectedCourse = emptyCourse;
+  originalTitle:string = '';
 
-  constructor() { }
+// _____________________________________________________
 
+
+
+
+
+  constructor(private coursesData: CoursesService) { }
+
+
+
+// _____________________________________________________
+  
+
+
+  
   ngOnInit(): void {
+    this.courses = this.coursesData.courses;
   }
+
+
+
+// __________________________________________________
+
 
 
   selectCourse(course) {
-    this.selectedCourse = course;
+    this.selectedCourse = {...course};
+    this.originalTitle = course.title;
   }
-
+  saveCourse(course) {
+    console.log(course)
+  }
   clear() {
     this.selectCourse({...emptyCourse})
   }
