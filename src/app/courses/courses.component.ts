@@ -28,7 +28,7 @@ export class CoursesComponent implements OnInit {
 
 
 
-  constructor(private coursesData: CoursesService) { }
+  constructor(private coursesDataService: CoursesService) { }
 
 
 
@@ -38,7 +38,7 @@ export class CoursesComponent implements OnInit {
 
   
   ngOnInit(): void {
-    this.courses = this.coursesData.courses;
+    this.fetchCourses();
   }
 
 
@@ -51,9 +51,36 @@ export class CoursesComponent implements OnInit {
     this.selectedCourse = {...course};
     this.originalTitle = course.title;
   }
-  saveCourse(course) {
-    console.log(course)
+
+  fetchCourses() {
+    this.coursesDataService.getCourses()
+      .subscribe(result => this.courses = result)
   }
+
+  saveCourse(course) {
+    if (course.id) {
+      this.updateCourse(course);
+    } else {
+      this.createCourse(course);
+    }
+  }
+
+  updateCourse(course) {
+    this.coursesDataService.update(course)
+      .subscribe(result => this.fetchCourses())
+  }
+
+  createCourse(course){
+    this.coursesDataService.create(course)
+      .subscribe(result => this.fetchCourses())
+  }
+
+  deleteCourse(courseId){
+    this.coursesDataService.deleteCourse(courseId)
+      .subscribe(result => this.fetchCourses())
+  }
+
+
   clear() {
     this.selectCourse({...emptyCourse})
   }

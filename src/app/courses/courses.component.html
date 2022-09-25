@@ -10,6 +10,13 @@
                 <mat-list>
                     <mat-list-item *ngFor="let course of courses" (click)="selectCourse(course)">
                         {{course.title | titlecase}}
+                    
+                        <button 
+                        mat-icon-button 
+                        color="warn"
+                        (click)="deleteCourse(course.id); $event.stopImmediatePropagation()">
+                            <mat-icon>delete</mat-icon>
+                        </button>
                     </mat-list-item>
                 </mat-list>
             </mat-card-content>
