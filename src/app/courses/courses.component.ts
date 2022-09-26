@@ -19,7 +19,7 @@ const emptyCourse: Course = {
 export class CoursesComponent implements OnInit {
 
   courses = [];
-  selectedCourse = emptyCourse;
+  currentCourse = emptyCourse;
   originalTitle:string = '';
 
 // _____________________________________________________
@@ -48,7 +48,7 @@ export class CoursesComponent implements OnInit {
 
 
   selectCourse(course) {
-    this.selectedCourse = {...course};
+    this.currentCourse = {...course};
     this.originalTitle = course.title;
   }
 
