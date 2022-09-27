@@ -6,15 +6,19 @@
         </mat-card-header>
         <mat-card-content>
             <mat-list>
-                <mat-list-item *ngFor="let course of courseList" (click)="selected.emit(course)">
-                    {{course.title | titlecase}}
-                
-                    <button 
+                <mat-list-item  
+                *ngFor="let course of courseList" 
+                (click)="selected.emit(course)">
+                <h3 matLine>{{course.title | titlecase}}</h3>
+                <p matLine>
+                    {{course.description}}
+                </p>
+                <button 
                     mat-icon-button 
                     color="warn"
                     (click)="deleted.emit(course.id); $event.stopImmediatePropagation()">
-                        <mat-icon>delete</mat-icon>
-                    </button>
+                    <mat-icon>delete</mat-icon>
+                </button>
                 </mat-list-item>
             </mat-list>
         </mat-card-content>

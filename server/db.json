@@ -8,13 +8,6 @@
       "favorite": true
     },
     {
-      "id": "2",
-      "title": "Services in Angular",
-      "description": "Deep Dive into Services & Dependency Injection!",
-      "percentComplete": 55,
-      "favorite": true
-    },
-    {
       "id": "3",
       "title": "Server Communication",
       "description": "Communicate with RESTful APIs, Create Full CRUD routes!",
