@@ -1,8 +1,8 @@
-# Angular 13 Fundamentals Workshop
+# Angular FUndamentals
 
 ![Angular 13 Fundamentals Workshop App](src/assets/screenshots/demo.png)
 
-This is the sample project for the Angular 13 Fundamentals Workshop.
+This is the sample project that demos Angular Fundamentals
 
 This sample project includes an Angular web application generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.0.3. It also contains a mock RESTful API using `json-server`.
 
